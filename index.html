@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
+    <style>
+        body{
+            padding:0;
+            margin:0;
+            height:100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'NanumSquareRound',sans-serif;
+        }
+        #timer{
+            text-align: center;
+            font-size: 100px;
+            color: white;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div id="timer"></div>
+    <script>
+        document.body.style.backgroundImage = 'url("https://random.imagecdn.app/'+document.body.clientWidth+'/'+document.body.clientHeight+'")'
+        const urlParams = new URLSearchParams(window.location.search)
+        let sec = urlParams.get('time')*60
+        document.getElementById('timer').innerHTML = Math.floor(sec/60).toString()+':'+(sec%60).toString().padStart(2,'0')
+        document.getElementById('timer').style.textDecoration='underline'
+        let check = false
+        function startTimer() {
+            timerInterval = setInterval(() => {
+            document.getElementById('timer').innerHTML = Math.floor(sec/60).toString()+':'+(sec%60).toString().padStart(2,'0')
+            sec--
+            document.getElementById('timer').style.textDecoration=''
+            }, 1000)
+            check = true
+        }
+        function stopTimer() {
+            clearInterval(timerInterval)
+            document.getElementById('timer').style.textDecoration='underline'
+            check = false
+        }
+        document.addEventListener("keydown", (event) => {
+            if (event.keyCode === 32) {
+                if (check) {
+                stopTimer()
+                } else {
+                startTimer()
+                }
+            }
+        })
+    </script>
+</body>
+</html>
