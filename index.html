@@ -32,7 +32,10 @@
         let check = false
         function startTimer() {
             timerInterval = setInterval(() => {
-            document.getElementById('timer').innerHTML = Math.floor(sec/60).toString()+':'+(sec%60).toString().padStart(2,'0')
+    
+            s = Math.floor(sec/60).toString()+':'+(sec%60).toString().padStart(2,'0')
+            document.title = s
+            document.getElementById('timer').innerHTML = s
             sec--
             document.getElementById('timer').style.textDecoration=''
             }, 1000)
